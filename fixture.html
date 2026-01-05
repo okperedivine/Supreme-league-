@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025/2026 Fixtures | Supreme League</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+    }
+
+    header {
+      background: #111;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    nav a {
+      color: #f5c542;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .fixtures-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #f5c542;
+      font-weight: bold;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 35px;
+      color: white;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      font-size: 14px;
+      opacity: 0.8;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Supreme League Fixtures</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="fixtures.html">Fixtures</a>
+    </nav>
+  </header>
+
+  <section>
+    <div class="fixtures-title">2025/2026 Season Fixtures</div>
+
+    <div class="gallery" id="gallery">
+      <!-- Images will auto-load here -->
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span>&times;</span>
+    <img id="lightbox-img">
+  </div>
+
+  <footer>
+    © 2026 Supreme League. All rights reserved.
+  </footer>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+
+    // Auto-load images D1.jpg → D50.jpg (only existing ones)
+    for(let i=1; i<=50; i++){
+      const imgPath = `images/D${i}.jpg`;
+      fetch(imgPath, { method: 'HEAD' })
+        .then(res => {
+          if(res.ok){
+            const img = document.createElement("img");
+            img.src = imgPath;
+            img.alt = `Fixture ${i}`;
+            img.onclick = () => openLightbox(imgPath);
+            gallery.appendChild(img);
+          }
+        });
+    }
+
+    function openLightbox(src) {
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox").style.display = "flex";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
