@@ -47,17 +47,39 @@
       gap: 15px;
     }
 
-    .gallery img {
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .gallery-item img {
       width: 100%;
       height: 220px;
       object-fit: cover;
-      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
-    .gallery img:hover {
-      transform: scale(1.05);
+    /* HOVER FADE */
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      opacity: 0.75;
+    }
+
+    /* TEAM NAME ON IMAGE */
+    .team-name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #f5c542;
+      font-weight: bold;
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
     }
 
     /* LIGHTBOX */
@@ -69,12 +91,21 @@
       justify-content: center;
       align-items: center;
       z-index: 1000;
+      flex-direction: column;
+      text-align: center;
     }
 
     .lightbox img {
       max-width: 90%;
-      max-height: 90%;
+      max-height: 80%;
       border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .lightbox-team {
+      font-size: 20px;
+      color: #f5c542;
+      font-weight: bold;
     }
 
     .lightbox span {
@@ -111,13 +142,42 @@
     <div class="fixtures-title">2025/2026 Season Fixtures</div>
 
     <div class="gallery">
-      <img src="Images/D1.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D2.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D3.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D4.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D5.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D6.jpg" onclick="openLightbox(this.src)">
-      <img src="Images/D7.jpg" onclick="openLightbox(this.src)">
+
+      <div class="gallery-item">
+        <div class="team-name">Divinity FC</div>
+        <img src="Images/D1.jpg" onclick="openLightbox(this.src, 'Divinity FC')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Humbled FC</div>
+        <img src="Images/D2.jpg" onclick="openLightbox(this.src, 'Humbled FC')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Hik FC</div>
+        <img src="Images/D3.jpg" onclick="openLightbox(this.src, 'Hik FC')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Storm Chaser</div>
+        <img src="Images/D4.jpg" onclick="openLightbox(this.src, 'Storm Chaser')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Ayoola Becoming Champ</div>
+        <img src="Images/D5.jpg" onclick="openLightbox(this.src, 'Ayoola Becoming Champ')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Ruthless FC</div>
+        <img src="Images/D6.jpg" onclick="openLightbox(this.src, 'Ruthless FC')">
+      </div>
+
+      <div class="gallery-item">
+        <div class="team-name">Fallen Angel</div>
+        <img src="Images/D7.jpg" onclick="openLightbox(this.src, 'Fallen Angel')">
+      </div>
+
     </div>
   </section>
 
@@ -125,6 +185,7 @@
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <span>&times;</span>
     <img id="lightbox-img">
+    <div class="lightbox-team" id="lightbox-team"></div>
   </div>
 
   <footer>
@@ -132,8 +193,9 @@
   </footer>
 
   <script>
-    function openLightbox(src) {
+    function openLightbox(src, team) {
       document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox-team").textContent = team;
       document.getElementById("lightbox").style.display = "flex";
     }
 
@@ -143,6 +205,4 @@
   </script>
 
 </body>
-</html>      
-
-
+</html>
