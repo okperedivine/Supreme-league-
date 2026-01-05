@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2025/2026 Fixtures | Supreme League</title>
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #0b0b0b;
-      color: #fff;
+      color: #ffffff;
     }
 
     header {
@@ -23,10 +24,6 @@
       text-decoration: none;
       margin: 0 15px;
       font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
     }
 
     section {
@@ -99,21 +96,27 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
     <h1>Supreme League Fixtures</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="fixtures.html">Fixtures</a>
+      <a href="home.html">Home</a>
     </nav>
   </header>
 
   <section>
     <div class="fixtures-title">2025/2026 Season Fixtures</div>
 
-    <div class="gallery" id="gallery">
-      <!-- Images will auto-load here -->
+    <div class="gallery">
+      <img src="images/D1.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D2.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D3.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D4.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D5.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D6.jpg" onclick="openLightbox(this.src)">
+      <img src="images/D7.jpg" onclick="openLightbox(this.src)">
     </div>
   </section>
 
@@ -128,14 +131,18 @@
   </footer>
 
   <script>
-    const gallery = document.getElementById("gallery");
+    function openLightbox(src) {
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox").style.display = "flex";
+    }
 
-    // Auto-load images D1.jpg → D50.jpg (only existing ones)
-    for(let i=1; i<=50; i++){
-      const imgPath = `images/D${i}.jpg`;
-      fetch(imgPath, { method: 'HEAD' })
-        .then(res => {
-          if(res.ok){
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>          if(res.ok){
             const img = document.createElement("img");
             img.src = imgPath;
             img.alt = `Fixture ${i}`;
@@ -156,4 +163,5 @@
   </script>
 
 </body>
+
 </html>
